@@ -1,6 +1,11 @@
+
+/* IMPORT DES FONTS DES PROJETS. CELLE-CI EST LA PREMIèRE POSSIBILITé D'IMPORTER UNE FONT. CE N'EST PAS CELLE QUE JE RECOMMANDE PCQ IL FAUT ABSOLUMENT DE L'INTERNET POUR POUVOIR LE LOADER */
 @import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Source+Code+Pro:wght@500&display=swap');
 
 
+
+/* CELLE-CI EST LA DEUXIEME MANIèRE, CELLE QU'ON IMPORTE DEPUIS LE FICHIER "FONT" DANS LES ASSETS QUI ONT éTé TéLéCHARGéES DEPUIS LE BROWSER */
 @font-face {
     font-family: 'spooky';
     src: url('../font/ScaryHalloweenFont.ttf');
@@ -26,9 +31,8 @@
     src: url('../font/ProductSansRegular.ttf');
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Source+Code+Pro:wght@500&display=swap');
 
-
+/* POUR RETIRER TOUT PADDING ET MARGIN QUE LE BROWSER MET AUTOMATIQUEMENT. LE * EST UN SELECTEUR UNIVERSEL */
 * {
     padding: 0;
     margin: 0;
@@ -36,90 +40,171 @@
 }
 
 
-body {
-    /* background-color: #f0f0f0; */
-    background-color: #df0059;
 
+body {
+
+    /* J'ai copier la font qu'utilise i3 */
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+    /* Ici je fais en sorte que ma page tienne sur la taille de l'écran et pas plus. */
     width: 100vw;
     height: 100vh;
 
+    /* J'utilise un display flex. C'est comme une methode d'organisation des éléments. Tu as aussi la grid, maiiiis j'ai une préférence pour les flex */
     display: flex;
+    /* Quand tu fais un display flex, il emboitera les elements enfants l'une a coté de l'autre. Dans notre cas, on ne veut pas du coup je change la flex direction column car de base elle est en row */
     flex-direction: column;
+    /* J'alligne les enfant horitalement parlant au centre de l'écran (comme un justify center en word) */
     align-items: center;
+    /* Puis j'alligne les enfants verticalement parlant au centre de l'écran  */
     justify-content: space-between;
 
+    /* petite info. étant donné que je suis en flex direction column, le justify devient verticale et align est horizontale. Mais si tu ne change pas la flex direction et la laisse en row: Justify content devient alors horizontal et align devient verticale */
 }
 
 
+/* BACKGROUND DE MON APPLICATION */
+main{
+
+    /* je fais en sorte qu'il prenne toute la taille d'écran peut importe quel écran */
+    width: 100vw;
+    height: 100vh;
+
+    /* je fixe sa position pour qu'il ne bouge pas si il y a du scroll */
+    position: fixed;
+    /* je lui met un z-index -1 pour qu'il soit dans une couche en dessous afin de laisser le reste des enfant prendre le dessus. Sinon l'image se mettra au dessous de tout a cause de la position fixe */
+    z-index: -1;
+
+    /* je crois que c'est pas compliquer de comprendre ça haha :3 */
+    background-image: url('../img/5149049.webp');
+    background-size: cover;
+}
+
+/* TITRE */
 h1 {
+    /* le titre aura prendra la taille horizontal de son parent qui est body donc 100vw  */
+    width: 100%;
+
+    /* ici je fais en sorte qu'il soit en maj */
     text-transform: uppercase;
-    padding-top: 40px;
+
+    /* je lui ajoute un padding top et bottom de 40px et 0 dans left et right (en gros le padding ajoutera une marge dans le cadre de l'élément */
+    padding: 40px 0;
+
+    /* je centre mon text */
     text-align: center;
 
-    width: 90%;
-    transition: all 0.5s ease-in-out;
+    /* le text shadow me permet de faire un effet néon. Je t'avoue que j'ai juste tapé sur google "néon" et j'ai copier coller le code et changer les couleurs mdrrr et oui, les dev passe le 3/4 de leurs temps à copier coller mdrrrr */
+    text-shadow: 0 0 5px #e2528c, 0 0 15px #e2528c, 0 0 20px #e2528c, 0 0 40px #e2528c, 0 0 60px #df0059, 0 0 10px #e2528c, 0 0 98px #df0059;
+    /* ici c'est pour que la typo soit blanche */
+    color: white;
+
+    /* j'ajoute une toujours une transition pour que si on reduit la taille d'écran, il fera une animation quand il bougera */
+    transition: all 0.5s ease-in-out; 
 }
 
-
+/* CONTAINER DE MES CARDS. */
 .container {
+    /* Je met la taille de mon container. J'utilie le vw et vh pour qu'il s'adapte plus facilement en fonction de la taille d'écran */
     width: 100vw;
-    height: 85vh;
+    height: 90vh;
 
-    background-color: #f0f0f0;
-    /* background-color: #df0059; */
-
+    /* je faiss encore un display flex, mais pour cette fois je garde la direction en row et non pas en column comme j'avais fais plus haut */
     display: flex;
+    /* Le space evenly permet d'avoir des espacement homogènne dans tous mes elements enfants*/
     justify-content: space-evenly;
+    /* Le flex wrap fait en sorte que si la taille d'écran se réduit, il changera le nombre d'enfant dans la ligne automatiquement (genre 4 dans grand écran, 1 dans petit) */
     flex-wrap: wrap;
+    /* et je centre verticalement mes elements */
     align-items: center;
 
+    /* si jamais mes éléments dépasse la taille horizontale de mon container, l'overflow-y: scroll pourra faire en sorte que l'utilisateur puisse scroller */
     overflow-y: scroll;
 
+    /* petite transition des familles si on change de taille d'écran fait toujours plaisir */
     transition: all 0.5s ease-in-out;
 }
 
-
+/* MES CARD, QUI SONT LES PROJETS */
 .card {
-    background-color: #f0f0f0;
+    /* j'impose une taille en pixel */
     width: 300px;
     height: 300px;
 
+    /* border radius permet d'avoir les coins courbé. Si tu le fais en pourcentage ce sera moche :3 */
     border-radius: 20px;
 
+    /* J'ajoute une marge autour de ma card pour qu'il y ait un plus grand écart entre les projets 10px en haut et en bas et 20px a gauche et a droite */
     margin: 10px 20px;
 
-    transition: all 0.5s ease-in-out;
-    border: 2px solid #2a3cad;
-    overflow: hidden;
+    /* un petit border avec un box-shadow pour faire un effet néon */
+    border: 2px solid #df0059;
+    box-shadow: 0px 0px 10px #df0059;
+    
+    /* je change l'opacité de moitié pour que quand on hover l'élément son opacité deviendra à 100% (la valeur de l'opacité est de 0 à 1) */
+    opacity: 0.5;
+    
+    /* je réduit un peu la taille de mes cart pour que quand on hover la card, elle prendre sa taille à 1 */
+    transform: scale(0.95);
+    
+    /* une transition fait toujours plaisir :3 */
+    transition: all 0.3s ease-in-out;
+
 }
 
+/* QUAND ON PASSE LA SOURIS SUR LA CARD OU PROJET */
+.card:hover{
+    /* on change l'opacité à 100% (dans ce cas c'est 1) */
+    opacity: 1;
+
+    /* on change la couleur du border */
+    border: 2px solid #1400ca;
+    box-shadow: 0px 0px 10px #1400ca;
+
+    /* on change l'agrandit à 100% */
+    transform: scale(1);
+
+    /* petite transition des famille */
+    transition: all 0.3s ease-in-out;
+}
+
+
+/* LES LIENS DES PROJETS */
 a {
+    /* vu que dedans j'ai mit un h3 et l'image, je fais la meme manipulation que le body */
     display: flex;
     flex-direction: column;
     align-items: center;
+    /* sauf que pour cette fois, je fais en sorte que l'espacement soit uniquement entre les éléments. Ce qui fait que image sera au top et l'h3 au bottom */
     justify-content: space-between;
 
+    /* pour qu'il ait la même height que sont parent card */
     height: 100%;
 
+    /* les balises a ont un style prédefinit par les browser. Je l'annule en mettant text-decoration none */
     text-decoration: none;
     
     color: black;
 }
 
-
-img {
-    width: 300px;
+/* LES IMAGES DANS LES CARDS (cette synthaxe de mettre deux balises l'une a coté de l'autre me permet de séléctionner les images qui sont dans des a. Si je ne fais pas comme ça et que j'utilise uniquement img, il va faire de meme pour toutes les images, ce qui n'est pas cool :/ passe la souris sur le a et img, vscode te montrera la structure de l'html)  */
+a img {
+    /* son image prendra 100% de la taille de son parent card et une height imposée de 200px */
+    width: 100%;
     height: 200px;
+
+    /* je met un border radius en haut a droite et en haut a gauche de mes image pour qu'elle est la meme forme que la card */
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
 }
 
 
+/* CLASSES SPéCIFIQUES. (dans l'html, j'ai ajouter a ma div card une classe avec 2 elements, et card qui aura un style général pour toutes mes cards, + un avec le nom du projet. De la sorte je peux juste mentionner le nom du projet et lui mettre un background qui est le meme que leurs site) */
 .tigre{
 
     background-color: #FCEEF4;
 
 }
-
 
 .spooky{
 
@@ -127,13 +212,11 @@ img {
 
 }
 
-
 .enigma{
 
     background-color: #191A19;
 
 }
-
 
 .develop{
 
@@ -141,20 +224,17 @@ img {
 
 }
 
-
 .decodage{
 
     background-color: #13192C;
 
 }
 
-
 .matching{
 
     background-color: #F3F1E9;
 
 }
-
 
 .su{
 
@@ -163,16 +243,14 @@ img {
 }
 
 
+/* TITRE DE CHAQUE PROJET. (meme histoire qu'avec le a et img, sauf que c'est le nom du projet et h2 avec lequel je met une font comme dans leurs site, ainsi que la couleur */
 .tigre h2{
-    padding-bottom: 20px;
 
     font-family: 'Luckiest Guy', cursive;
     color: #bb4430;
 }
 
 .spooky h2{
-
-    padding-bottom: 20px;
 
     font-family: 'spooky';
     color: #ffa500;
@@ -181,15 +259,11 @@ img {
 
 .enigma h2{
 
-    padding-bottom: 20px;
-
     font-family: 'enigma';
     color: rgb(4, 235, 235);
 }
 
 .develop h2{
-
-    padding-bottom: 20px;
 
     font-family: 'develop';
     color: white;
@@ -198,15 +272,11 @@ img {
 
 .decodage h2{
 
-    padding-bottom: 20px;
-
     font-family: 'decodage';
     color: #ffdb71;
 }
 
 .matching h2{
-
-    padding-bottom: 20px;
 
     font-family: 'matching';
     color: black;
@@ -214,7 +284,54 @@ img {
 
 .su h2{
 
-    padding-bottom: 20px;
-
     font-family: 'Montserrat';
 }
+
+/* j'aurais pus le faire avant mais bon, j'ai imposé un padding-bottom à tout mes h2 pourqu'elles ne soient pas collé en bas de ma card */
+h2{
+
+    padding-bottom: 40px;
+
+}
+
+/* Je t'invite à commenter cette partie pour que tu puisses voir. Mais en gros, vu que les logos de chacuns ont des tailles différentes, j'ai à chaque fois adapté leurs image pour qu'elles soient plus homogènes avec les autres images */
+.tigre img{
+
+    width: 80%;
+
+}
+
+.spooky img{
+
+    width: 250px;
+
+}
+
+.develop img{
+
+    width: 150px;
+    padding-top: 50px; 
+    padding-bottom: 30px; 
+
+}
+
+.su img{
+
+    width: 150px;
+
+}
+
+
+
+
+/* J'ai ajouter un media query pour que ma mes cards ont l'opacité à 100% et un scale de 100% quand on passe à une taille d'écran plus petite que 920px */
+@media (max-width: 920px) {
+    .card{
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* 
+    ET VOILI VOILUUUU siiiiii jamais tu as des questions, n'hésite surtout paaaaas 
+*/
